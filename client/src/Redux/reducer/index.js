@@ -68,14 +68,14 @@ export default function reducer(state = initialState, { type, payload }) {
                 }
             }
         case FILTER_ACTIVITY:
-            const filterCountries = state.countries.result.filter(c => {
+            const filterActivity = state.countries.result.filter(c => {
                 return c.activities === payload
             })
             return {
                 ...state,
                 countries: {
                     ...state.countries,
-                    result: filterCountries
+                    result: filterActivity
                 }
             }
         default:

@@ -64,7 +64,6 @@ export const getActivities = ({ name }) => {
             })
         } catch (error) {
             console.log(error)
-            next(error)
         }
 
     }

@@ -21,7 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const { apiCountries } = require('./src/controllers/countries');
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     console.log('%s Cargando paises...');
     const preload = await apiCountries()

@@ -9,10 +9,10 @@ async function apiCountries() {
             return {
                 id: country.alpha3Code,
                 name: country.name,
-                flag: country.flags[0],
-                continent: country.continent,
+                flag: country.flag,
+                continent: country.region,
                 capital: country.capital || "not defined",
-                subregion: country.region,
+                subregion: country.subregion,
                 area: country.area || 0,
                 population: country.population || 0
             }
