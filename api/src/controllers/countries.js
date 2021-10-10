@@ -3,16 +3,16 @@ const axios = require('axios');
 
 async function apiCountries() {
     try {
-        let result = await axios.get('https://restcountries.com/v2/all');
+        let result = await axios.get('https://restcountries.com/v3.1/all');
 
         let countries = result.data.map((country) => {
             return {
-                id: country.alpha3Code,
-                name: country.name,
-                flag: country.flag,
-                continent: country.region,
-                capital: country.capital || "not defined",
-                subregion: country.subregion,
+                id: country.cca3,
+                name: country.name.common,
+                flag: country.flags.png || "not defined",
+                continent: country.region || "not defined",
+                capital: country.capital && country.capital[0] || "not defined",
+                subregion: country.subregion || "not defined",
                 area: country.area || 0,
                 population: country.population || 0
             }
@@ -29,9 +29,10 @@ async function apiCountries() {
 
 async function getCountries(req, res, next) {
     try {
-        let { name, order, page } = req.query;
+        let { name, orderP, filterA, page } = req.query;
 
         let countries = []
+        let result
         page = page ? page : 1
         const countriesXPage = 10
         //#region NAME
@@ -49,32 +50,35 @@ async function getCountries(req, res, next) {
         }
         //#endregion
 
-        //#region ORDER
-        if (order === 'asc' || !order || order === '') {
-            countries = countries.sort((a, b) => {
-                return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-            })
-        } else {
-            countries = countries.sort((a, b) => {
-                return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-            })
-        }
-        if (order === 'asc' || !order || order === '') {
+        //#region ORDER BY POPULATION
+        if (orderP === 'higher') {
             countries = countries.sort((a, b) => {
                 return a.population > b.population ? 1 : a.population < b.population ? -1 : 0
             })
-        } else {
+        } 
+        if (orderP ==='lower') {
             countries = countries.sort((a, b) => {
                 return b.population > a.population ? 1 : b.population < a.population ? -1 : 0
             })
         }
         //#endregion
 
+        //#region FILTER BY CONTINENT
+        if(filterA && filterA !== '') {
+            countries = countries.filter((country) => {return country.activities.filter((activity) => {return activity.name === filterA}).length})
+        }
+        //#endregion
+
         //#region PAGE
-        let result = countries.slice((countriesXPage * (page - 1)), (countriesXPage * (page - 1) + countriesXPage))
+        if (page > 1) {
+            result = countries.slice((countriesXPage * (page - 1) - 1), (countriesXPage * (page - 1) + (countriesXPage - 1)))
+        } else {
+            result = countries.slice(0, (countriesXPage - 1))
+        }
         //#endregion
 
         return res.send({
+            all: countries,
             result: result,
             count: countries.length
         })
@@ -87,9 +91,8 @@ async function getCountries(req, res, next) {
 
 async function getCountriesById(req, res, next) {
     try {
-        const { id } = req.params.id;
-        let countryId = id.toUpperCase();
-        let country = await Country.findByPk(countryId, { include: Activity })
+        const id = req.params.id;
+        let country = await Country.findByPk(id, { include: Activity })
         return res.send(country)
     } catch (error) {
         console.log(error)

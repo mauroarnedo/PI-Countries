@@ -4,18 +4,19 @@ import {
     GET_COUNTRY_DETAILS,
     SET_NAME,
     SET_PAGE,
-    SET_ORDER,
-    REMOVE_ACTIVITY,
-    FILTER_CONTINENT,
-    FILTER_ACTIVITY
+    SET_ORDER_P,
+    SET_FILTER_A,
+    FILTER_CONTINENT
 } from '../actions/index.js'
 
 const initialState = {
     countries: [],
+    countriesOrder: [],
     country: {},
     activities: [],
     name: "",
-    order: "",
+    orderP: "",
+    filterA: "",
     page: 1
 }
 
@@ -24,7 +25,8 @@ export default function reducer(state = initialState, { type, payload }) {
         case GET_COUNTRIES:
             return {
                 ...state,
-                countries: payload
+                countries: payload,
+                countriesOrder: payload
             }
         case GET_ACTIVITIES:
             return {
@@ -46,38 +48,26 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 page: payload
             }
-        case SET_ORDER:
+        case SET_ORDER_P:
             return {
                 ...state,
-                order: payload
+                orderP: payload
             }
-        case REMOVE_ACTIVITY:
+        case SET_FILTER_A:
             return {
                 ...state,
-                activity: payload
+                filterC: payload
             }
+        case ORDER_COUNTRIES:
+            return {
+                ...state,
+                countries: payload.slice(),
+            };    
         case FILTER_CONTINENT:
-            const filterCountries = state.countries.result.filter(c => {
-                return c.continent === payload
-            })
             return {
                 ...state,
-                countries: {
-                    ...state.countries,
-                    result: filterCountries
-                }
-            }
-        case FILTER_ACTIVITY:
-            const filterActivity = state.countries.result.filter(c => {
-                return c.activities === payload
-            })
-            return {
-                ...state,
-                countries: {
-                    ...state.countries,
-                    result: filterActivity
-                }
-            }
+                countries: payload
+            };
         default:
             return state
     }

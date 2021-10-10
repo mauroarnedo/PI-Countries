@@ -1,20 +1,22 @@
 import axios from 'axios';
+import { countriesOrderFilter } from '../../utils';
 
 export const GET_COUNTRIES = 'GET_COUNTRIES';
 export const GET_ACTIVITIES = 'GET_ALL_ACTIVITIES';
 export const GET_COUNTRY_DETAILS = 'GET_COUNTRY_DETAILS';
+export const REMOVE_COUNTRY = 'REMOVE_COUNTRY';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
-export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
-export const FILTER_CONTINENT = 'FILTER_CONTINENT';
-export const FILTER_ACTIVITY = 'FILTER_ACTIVITY';
 export const SET_NAME = 'SET_NAME';
 export const SET_PAGE = 'SET_PAGE';
-export const SET_ORDER = 'SET_ORDER';
+export const SET_ORDER_P = 'SET_ORDER_P';
+export const SET_FILTER_A = 'SET_FILTER_A';
+export const FILTER_COUNTRIES = 'FILTER_COUNTRIES';
+export const ORDER_COUNTRIES = 'ORDER_COUNTRIES';
 
-export const getCountries = ({ page, order, name }) => {
+export const getCountries = ({ page, orderP, filterA, name }) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`http://localhost:3001/countries?page=${page ? page : 1}&order=${order ? order : ""}&name=${name ? name : ""}`)
+            const response = await axios.get(`http://localhost:3001/countries?page=${page ? page : 1}&orderP=${orderP ? orderP : ""}&filterA=${filterA ? filterA : ""}&name=${name ? name : ""}`)
             return dispatch({
                 type: GET_COUNTRIES,
                 payload: response.data
@@ -40,14 +42,22 @@ export const getCountryDetails = (id) => {
     }
 }
 
+export const removeCountry = () => {
+    return {
+        type: REMOVE_COUNTRY,
+        payload: {}
+    }
+}
+
 export const createActivity = (activity) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         try {
-            const response = await axios.post(`http://localhost:3001/activities/`, activity)
-            return dispatch({
-                type: CREATE_ACTIVITY,
-                payload: response.data
-            })
+            axios.post(`http://localhost:3001/activities/`, activity)
+                .then(() => {
+                    return dispatch({
+                        type: CREATE_ACTIVITY
+                    })
+                })
         } catch (error) {
             console.log(error)
         }
@@ -69,22 +79,10 @@ export const getActivities = ({ name }) => {
     }
 }
 
-export const removeActivity = () => {
+export const setFilterA = (activity) => {
     return {
-        type: REMOVE_ACTIVITY,
-        payload: {}
-    }
-}
-export const filterActivity = (activity) => {
-    return {
-        type: FILTER_ACTIVITY,
+        type: SET_FILTER_A,
         payload: activity
-    }
-}
-export const filterContinent = (continent) => {
-    return {
-        type: FILTER_CONTINENT,
-        payload: continent
     }
 }
 
@@ -100,9 +98,36 @@ export const setPage = (page) => {
         payload: page
     }
 }
-export const setOrder = (order) => {
+
+export const setOrderP = (order) => {
     return {
-        type: SET_ORDER,
+        type: SET_ORDER_P,
         payload: order
+    }
+}
+
+export function orderCountries(orderTarget, criteria) {
+    return async function (dispatch) {
+        countriesOrderFilter(orderTarget, criteria)
+        .then((orderTarget) => {
+               
+            return dispatch({
+                    type: ORDER_COUNTRIES,
+                    payload: orderTarget,
+                })
+            })
+    }
+}
+
+export function filterCountries(orderTarget, criteria) {
+    return async function (dispatch) {
+        countriesOrderFilter(orderTarget, criteria)
+        .then((orderTarget) => {
+               
+            return dispatch({
+                    type: FILTER_COUNTRIES,
+                    payload: orderTarget,
+                })
+            })
     }
 }

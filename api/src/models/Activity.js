@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
         },
-        dificult: {
+        difficulty: {
             type: DataTypes.INTEGER, // Entre 1 y 5
         },
         duration: {
             type: DataTypes.INTEGER
         },
         season: {
-            type: DataTypes.STRING // Verano, Otoño, Invierno o Primavera
+            type: DataTypes.JSON // Verano, Otoño, Invierno o Primavera
         }
     }, {
         timestamps: false
