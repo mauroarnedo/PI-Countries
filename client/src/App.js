@@ -9,7 +9,7 @@ import PostActivity from './Components/Activity/PostActivity';
 
 function App() {
     return (
-      <div className="App">
+      <div>
         <Route exact path="/" component={LandingPage}/>
         <Route path="/home" component={NavBar}/>
         <Route exact path="/home" component={Home}/>

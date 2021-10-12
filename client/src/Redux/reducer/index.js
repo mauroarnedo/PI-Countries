@@ -4,17 +4,18 @@ import {
     GET_COUNTRY_DETAILS,
     SET_NAME,
     SET_PAGE,
+    SET_ORDER_A,
     SET_ORDER_P,
     SET_FILTER_A,
-    FILTER_CONTINENT
+    FILTER_COUNTRIES
 } from '../actions/index.js'
 
 const initialState = {
     countries: [],
-    countriesOrder: [],
     country: {},
     activities: [],
     name: "",
+    orderA: "",
     orderP: "",
     filterA: "",
     page: 1
@@ -25,8 +26,7 @@ export default function reducer(state = initialState, { type, payload }) {
         case GET_COUNTRIES:
             return {
                 ...state,
-                countries: payload,
-                countriesOrder: payload
+                countries: payload
             }
         case GET_ACTIVITIES:
             return {
@@ -48,6 +48,11 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 page: payload
             }
+        case SET_ORDER_A:
+            return {
+                ...state,
+                orderA: payload
+            }
         case SET_ORDER_P:
             return {
                 ...state,
@@ -58,16 +63,17 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 filterC: payload
             }
-        case ORDER_COUNTRIES:
+        case FILTER_COUNTRIES:
+            let newCountries = state.countries.all.filter(c => {
+                return c.continent === payload
+            })
             return {
                 ...state,
-                countries: payload.slice(),
-            };    
-        case FILTER_CONTINENT:
-            return {
-                ...state,
-                countries: payload
-            };
+                countries: {
+                    ...state.countries,
+                    result: newCountries
+                }
+            }
         default:
             return state
     }

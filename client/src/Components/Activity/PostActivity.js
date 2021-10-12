@@ -6,7 +6,7 @@ import { getCountries, createActivity } from '../../Redux/actions/index.js';
 function validate(input) {
     const errors = {};
     if (!input.name) errors.name = 'Se requiere un nombre';
-    if (!input.difficulty || isNaN(input.difficulty)) errors.difficulty = 'Se requiere un nivel de dificultad entre 1 y 5';
+    if (!input.difficulty || input.difficulty === "" || isNaN(input.difficulty)) errors.difficulty = 'Se requiere un nivel de dificultad entre 1 y 5';
     if (!input.duration || input.duration > 24 || input.duration < 1) errors.duration = 'Se requiere duración de actividad entre 1 y 24 horas';
     if (!input.season.length) errors.season = 'Se requiere al menos una temporada';
     if (!input.countries.length) errors.countries = 'Se requiere al menos un país';
@@ -73,18 +73,15 @@ export default function PostActivity() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (Object.values(errors).length > 0) alert("You need to complete all the fields");
-        else {
-            dispatch(createActivity(input))
-            setInput({
-                name: '',
-                difficulty: '',
-                duration: '',
-                season: [],
-                countries: []
-            })
-            alert("You create an activity successfully")
-        }
+        dispatch(createActivity(input))
+        setInput({
+            name: '',
+            difficulty: '',
+            duration: '',
+            season: [],
+            countries: []
+        })
+        alert("You create an activity successfully")
     };
 
     return (
@@ -124,7 +121,7 @@ export default function PostActivity() {
                         <option id="spring" value="spring">Spring</option>
                     </select>
                     {errors.season && (<p>{errors.season}</p>)}
-                    {input.season.length >0 && input.season.map(s=> (
+                    {input.season.length > 0 && input.season.map(s => (
                         <div key={s}>{s}</div>
                     ))}
                 </div>
@@ -139,11 +136,11 @@ export default function PostActivity() {
                         }
                     </select>
                     {errors.countries && (<p>{errors.countries}</p>)}
-                    {input.countries.length >0 && input.countries.map(c=> (
+                    {input.countries.length > 0 && input.countries.map(c => (
                         <div key={c}>{c}</div>
                     ))}
                 </div>
-                <input type="submit" value="create" />
+                <input disabled={Object.values(errors).length > 0} type="submit" value="create" />
             </form>
         </div>
     )

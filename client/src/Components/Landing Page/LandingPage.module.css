@@ -1,0 +1,32 @@
+.landing {
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items:space-around;
+  height: 100vh;
+  background-image: url("https://www.countryreports.org/uGraphics/tempImages/selectBack.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+  
+.logo {
+  color: rgb(206, 206, 206);
+  font-size: 100px;
+  width: 700px;
+  height: 300px;
+  animation-duration: 3s;
+  animation-name: logo;
+  animation-iteration-count: infinite;
+}
+  
+@keyframes logo {
+  50% {
+    width: 700px;
+    height: 300px;
+  }
+
+  50% {
+    width: 600px;
+    height: 200px;
+  }
+}

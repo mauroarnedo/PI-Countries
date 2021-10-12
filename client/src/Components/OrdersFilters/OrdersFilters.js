@@ -1,34 +1,29 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, setOrderP, setFilterA, orderCountries, filterCountries } from "../../Redux/actions";
+import { getCountries, setOrderP, setFilterA, setOrderA, filterCountries } from "../../Redux/actions";
 
 export default function OrdersFilters() {
-    const { countriesOrder, activities } = useSelector(state => state)
+    const { page, name, orderA, orderP, filterA, activities } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const handleOrderByName = (e) => {
-        if (e.target.value === 'name') {
-            dispatch(getCountries({}))
-        }
-        orderCountries(countriesOrder, { name: e.target.value })
+        dispatch(setOrderA(e.target.value))
+        dispatch(getCountries({ page, name, orderA: e.target.value, orderP, filterA }))
     }
 
     const handleOrderByPopulation = (e) => {
         dispatch(setOrderP(e.target.value))
-        dispatch(getCountries({ orderP: e.target.value }))
+        dispatch(getCountries({ page, name, filterA, orderA, orderP: e.target.value }))
     }
 
     const filterByContinent = (e) => {
-        if (e.target.value === 'filter') {
-            dispatch(getCountries({}))
-        }
-        filterCountries(countriesOrder, { continent: e.target.value })
-
-    }
+        if (e.target.value !== 'filter') {
+            dispatch(filterCountries(e.target.value))
+        }}
 
     const filterByActivities = (e) => {
         dispatch(setFilterA(e.target.value))
-        dispatch(getCountries({ filterA: e.target.value }))
+        dispatch(getCountries({ page, name, orderA, orderP, filterA: e.target.value }))
     }
 
     return (

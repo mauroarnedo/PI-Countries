@@ -29,7 +29,7 @@ async function apiCountries() {
 
 async function getCountries(req, res, next) {
     try {
-        let { name, orderP, filterA, page } = req.query;
+        let { name, orderA, orderP, filterA, page } = req.query;
 
         let countries = []
         let result
@@ -50,13 +50,26 @@ async function getCountries(req, res, next) {
         }
         //#endregion
 
+        //#region ORDER BY NAME
+        if (orderA === 'Asc') {
+            countries = countries.sort((a, b) => {
+                return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+            })
+        }
+        if (orderA === 'Desc') {
+            countries = countries.sort((a, b) => {
+                return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+            })
+        }
+        //#endregion
+
         //#region ORDER BY POPULATION
         if (orderP === 'higher') {
             countries = countries.sort((a, b) => {
                 return a.population > b.population ? 1 : a.population < b.population ? -1 : 0
             })
-        } 
-        if (orderP ==='lower') {
+        }
+        if (orderP === 'lower') {
             countries = countries.sort((a, b) => {
                 return b.population > a.population ? 1 : b.population < a.population ? -1 : 0
             })
@@ -64,8 +77,8 @@ async function getCountries(req, res, next) {
         //#endregion
 
         //#region FILTER BY CONTINENT
-        if(filterA && filterA !== '') {
-            countries = countries.filter((country) => {return country.activities.filter((activity) => {return activity.name === filterA}).length})
+        if (filterA && filterA !== '') {
+            countries = countries.filter((country) => { return country.activities.filter((activity) => { return activity.name === filterA }).length })
         }
         //#endregion
 
