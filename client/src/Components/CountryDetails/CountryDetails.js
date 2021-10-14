@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getActivities, getCountryDetails, removeCountry, setPage } from "../../Redux/actions/index.js"
 import ActivityCard from '../Activity/ActivityCard';
 import meme from "../../img/meme.jpg";
+import styles from "./CountryDetails.module.css"
 
 export default function CountryDetails(props) {
     const { id } = props.match.params
@@ -26,8 +27,9 @@ export default function CountryDetails(props) {
 
     return (
         <div>
-            <button onClick={goBack}>Go back</button>
-            {
+            <button className={styles.link} onClick={goBack}>Go back</button>
+            <div className={styles.container}>
+               {
                 country?.name ?
                     <React.Fragment>
                         <h4>{country.name}</h4>
@@ -51,7 +53,9 @@ export default function CountryDetails(props) {
                     </React.Fragment>
                     :
                     <div>Loading...</div>
-            }
+            } 
+            </div>
+            
         </div>
     )
 }

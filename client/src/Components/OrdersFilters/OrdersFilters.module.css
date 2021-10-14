@@ -1,0 +1,13 @@
+.container {
+    display:flex;
+    flex-direction:row;
+    justify-content:right;
+}
+
+.container div select {
+    font-size: 1.2rem;
+    color: rgb(243, 240, 240);
+    background: rgba(166, 177, 211, 0.938);
+    border-radius: 15px;
+    transition: all 0.25s ease;
+}

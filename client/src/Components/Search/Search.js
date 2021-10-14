@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountries, setName, setPage } from "../../Redux/actions";
+import styles from "./Search.module.css";
 
 export default function Search() {
     const [input, setInput] = useState("")
@@ -20,7 +21,7 @@ export default function Search() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form className={styles.container} onSubmit={onSubmit}>
             <input type="text" placeholder="Search(Ex: Argentina, Uruguay..)" onChange={handleInputChange} value={input} />
             <button type="submit">🔍</button>
         </form>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCountries, createActivity } from '../../Redux/actions/index.js';
+import styles from "./styles.module.css";
 
 function validate(input) {
     const errors = {};
@@ -86,17 +87,17 @@ export default function PostActivity() {
 
     return (
         <div>
-            <div>
+            <div className={styles.link}>
                 <NavLink to="/home">Home</NavLink>
             </div>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <input value={input.name} onChange={handleInputChange} name="name" type="text" placeholder="Name"></input>
+            <form className={styles.form} onSubmit={onSubmit}>
+                <div className={styles.elements}>
+                    <input className={styles.select} value={input.name} onChange={handleInputChange} name="name" type="text" placeholder="Name"></input>
                     {errors.name && (<p>{errors.name}</p>)}
                 </div>
 
                 <div>
-                    <select onChange={handleInputChange} name="difficulty" >
+                    <select className={styles.selectDifficulty} onChange={handleInputChange} name="difficulty" >
                         <option value="">Difficulty</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -108,12 +109,12 @@ export default function PostActivity() {
                 </div>
 
                 <div>
-                    <input value={input.duration} onChange={handleInputChange} name="duration" type="number" placeholder="Duration (hours)" ></input>
+                    <input className={styles.select} value={input.duration} onChange={handleInputChange} name="duration" type="number" placeholder="Duration (hours)" ></input>
                     {errors.duration && (<p>{errors.duration}</p>)}
                 </div>
 
                 <div>
-                    <select onChange={handleSeasonSelection} name="season" >
+                    <select className={styles.selectSeason} onChange={handleSeasonSelection} name="season" >
                         <option id="" value="">Season/s</option>
                         <option id="summer" value="summer">Summer</option>
                         <option id="autumn" value="autumn">Autumn</option>
@@ -127,7 +128,7 @@ export default function PostActivity() {
                 </div>
 
                 <div>
-                    <select onChange={handleCountriesSelection} name="country">
+                    <select className={styles.selectCountry} onChange={handleCountriesSelection} name="country">
                         <option value="" key="">Country/ies</option>
                         {
                             countries.all && countries.all.map((c) => {
@@ -140,7 +141,7 @@ export default function PostActivity() {
                         <div key={c}>{c}</div>
                     ))}
                 </div>
-                <input disabled={Object.values(errors).length > 0} type="submit" value="create" />
+                <input className={styles.btnCrear} disabled={Object.values(errors).length > 0} type="submit" value="create" />
             </form>
         </div>
     )

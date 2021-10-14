@@ -1,0 +1,19 @@
+.container {
+    margin: 0;
+    background-color: #364552;
+    min-height: 84px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.link {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.8%;
+	width: auto;
+    background-color:rgba(15, 8, 54, 0.623);
+    color: rgba(255, 255, 255, 0.925);
+    border-radius: 20px;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, setOrderP, setFilterA, setOrderA, filterCountries } from "../../Redux/actions";
+import styles from "./OrdersFilters.module.css";
 
 export default function OrdersFilters() {
     const { page, name, orderA, orderP, filterA, activities } = useSelector(state => state)
@@ -19,6 +20,8 @@ export default function OrdersFilters() {
     const filterByContinent = (e) => {
         if (e.target.value !== 'filter') {
             dispatch(filterCountries(e.target.value))
+        } else{
+            dispatch(getCountries({page, name, orderA, orderP, filterA}))
         }}
 
     const filterByActivities = (e) => {
@@ -27,7 +30,7 @@ export default function OrdersFilters() {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <div>
                 <select onChange={handleOrderByName}>
                     <option value="name" label="Order alphabetic"></option>
