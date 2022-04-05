@@ -1,41 +1,67 @@
 .landing {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: center;
-  align-items:space-around;
+  align-items: center;
   height: 100vh;
-  background-image: url("https://www.countryreports.org/uGraphics/tempImages/selectBack.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
-  
+.landing a {
+  width: fit-content;
+  height: fit-content;
+}
+
 .logo {
-  text-decoration:none;
-  color: whitesmoke;
-  font-size: 100px;
-  width: 700px;
-  height: 300px;
+  appearance: none;
+  background-color: transparent;
+  border: 0.125em solid #1a1a1a;
+  border-radius: 0.9375em;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  min-height: 3.75em;
+  min-width: 0;
+  outline: none;
+  padding: 1em 2.3em;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
   animation-duration: 3s;
-  animation-name: logo;
-  animation-iteration-count: infinite;
-  text-shadow: 3px 5px 5px blue ;
+  animation-name: aparicion;
+  animation-iteration-count: 1;
 }
-  
-@keyframes logo {
-  50% {
 
-    width: 700px;
-    height: 300px;
-  }
+.logo:disabled {
+  pointer-events: none;
+}
 
+.logo:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.logo:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+@keyframes aparicion {
+  0% {
+    opacity: 0;
+  }
   50% {
-    width: 600px;
-    height: 200px;
+    opacity: 0.5;
   }
-  /* from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  } */
 }

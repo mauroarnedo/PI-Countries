@@ -1,36 +1,67 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getActivities, getCountries, setPage } from "../../Redux/actions/index.js";
+import {
+  getActivities,
+  getCountries,
+  setPage,
+} from "../../Redux/actions/index.js";
 import CountryCard from "../CountriesCards/Cards.js";
-import styles from './Home.module.css';
+import styles from "./Home.module.css";
 
 export default function Home() {
-    const dispatch = useDispatch();
-    const { countries, name, orderP, filterC, page } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const { countries, name, orderP, filterC, page } = useSelector(
+    (state) => state
+  );
 
-    useEffect(() => {
-        dispatch(getCountries({}))
-        dispatch(getActivities({}))
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getCountries({}));
+    dispatch(getActivities({}));
+  }, [dispatch]);
 
-    const changePage = (page) => {
-        dispatch(getCountries({ page, orderP, filterC, name }))
-        dispatch(setPage(page))
-    }
+  const changePage = (page) => {
+    dispatch(getCountries({ page, orderP, filterC, name }));
+    dispatch(setPage(page));
+  };
 
-    return (
-        <div className={styles.wrapper}>
-            <h1>Hello World!</h1>
-            <div className={styles.countries}>
-            {
-                countries?.result?.length > 0 && countries.result.map((c) => {
-                    return <CountryCard flag={c.flag} name={c.name} continent={c.continent} population={c.population} id={c.id} key={c.id} />
-                })
-            }
-            </div>
-            <button disabled={page - 1 === 0} onClick={() => { changePage(page - 1) }}>prev</button>
-                <label>{page}</label>
-            <button disabled={countries?.count <= (page * 10)} onClick={() => { changePage(page + 1) }}>next</button>
+  return (
+    <div className={styles.container}>
+      <h1>Let's learn a bit about each country!</h1>
+      <div className={styles.wrapper}>
+        <button
+          className={styles.navigationBtn}
+          disabled={page - 1 === 0}
+          onClick={() => {
+            changePage(page - 1);
+          }}
+        >
+          prev
+        </button>
+        <div className={styles.countries}>
+          {countries?.result?.length > 0 &&
+            countries.result.map((c) => {
+              return (
+                <CountryCard
+                  flag={c.flag}
+                  name={c.name}
+                  continent={c.continent}
+                  population={c.population}
+                  id={c.id}
+                  key={c.id}
+                />
+              );
+            })}
         </div>
-    )
+        <button
+          className={styles.navigationBtn}
+          disabled={countries?.count <= page * 10}
+          onClick={() => {
+            changePage(page + 1);
+          }}
+        >
+          next
+        </button>
+      </div>
+    </div>
+  );
 }
