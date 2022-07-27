@@ -39,13 +39,18 @@ export default function CountryDetails(props) {
         {country?.name ? (
           <React.Fragment>
             <h4>{country.name}</h4>
-            <h5>Código de país: {country.id}</h5>
             <img src={country.flag} alt={countries} />
-            <p>Capital: {country.capital}</p>
-            <p>Continent: {country.continent}</p>
-            <p>Subregión: {country.subregion}</p>
-            <p>Area: {country.area}</p>
-            <p>Population: {country.population}</p>
+            <div>
+              <p>
+                <strong>Código de país: {country.id}</strong>
+              </p>
+              <p>Capital: {country.capital}</p>
+              <p>Continent: {country.continent}</p>
+              <p>Subregión: {country.subregion}</p>
+              <p>Area: {country.area}</p>
+              <p>Population: {country.population}</p>
+            </div>
+
             <div>
               <h3>Tourist activities:</h3>
               {country.activities.length > 0
@@ -60,7 +65,7 @@ export default function CountryDetails(props) {
                       />
                     );
                   })
-                : " aqui iría una actividad si mi pais tuviera algo divertido xD"}
+                : "No activities found"}
             </div>
           </React.Fragment>
         ) : (

@@ -21,14 +21,15 @@ export default function Search() {
   };
 
   return (
-    <form className={styles.container} onSubmit={onSubmit}>
+    <form className={styles.searchBox} onSubmit={onSubmit}>
       <input
+        className={styles.inputSearch}
         type="text"
-        placeholder="Search(Ex: Argentina, Uruguay..)"
+        placeholder="Search!  (Ex: Argentina, Uruguay..)"
         onChange={handleInputChange}
         value={input}
       />
-      <button type="submit">🔍</button>
+      <button className={styles.btnSearch} type="submit"></button>
     </form>
   );
 }
