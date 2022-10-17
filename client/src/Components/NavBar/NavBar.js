@@ -32,17 +32,21 @@ export default function NavBar() {
     dispatch(setOrderP(""));
   };
   return (
-    <div className={styles.container}>
-      <NavLink to="/home">
-        <button onClick={home} className={styles.link}>
-          Home
-        </button>
-      </NavLink>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <NavLink to="/home">
+          <button onClick={home} className={styles.link}>
+            Home
+          </button>
+        </NavLink>
       <OrdersFilters />
-      <Search />
       <NavLink to="/createActivity">
-        <button class={styles.link}>Create an activity!</button>
+        <button className={styles.link}>Create an activity!</button>
       </NavLink>
+      </div>
+      <div>
+        <Search />
+      </div>
     </div>
   );
 }

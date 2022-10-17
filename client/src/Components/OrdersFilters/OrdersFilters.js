@@ -48,14 +48,14 @@ export default function OrdersFilters() {
     <div className={styles.container}>
       <div>
         <select onChange={handleOrderByName}>
-          <option value="name" label="Order alphabetic"></option>
+          <option value="" label="Order alphabetic"></option>
           <option value="Asc">A-Z</option>
           <option value="Desc">Z-A</option>
         </select>
       </div>
       <div>
         <select onChange={handleOrderByPopulation}>
-          <option value="population" label="Order by population"></option>
+          <option value="" label="Order by population"></option>
           <option value="higher">Higher</option>
           <option value="lower">Lower</option>
         </select>

@@ -1,8 +1,16 @@
-.container {
-  margin: 0;
+.wrapper{
+  min-width: 100%;
   min-height: 84px;
-  align-items: center;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.container {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
   justify-content: space-around;
 }
 
