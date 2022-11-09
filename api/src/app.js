@@ -26,6 +26,9 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
+server.get("/", (req, res) => {
+  res.send("Pagina de inicio App")
+})
 
 // Error catching endware.
 server.use((err, req, res, next) => {
