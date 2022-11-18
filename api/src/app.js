@@ -27,7 +27,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/", routes);
+server.use(routes);
 server.get("/", (req, res) => {
   res.send("Pagina de inicio App")
 })
