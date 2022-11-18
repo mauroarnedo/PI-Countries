@@ -5,4 +5,5 @@ module.exports = {
     DB_PASSWORD: process.env.DB_PASSWORD || "postgres",
     DB_HOST: process.env.DB_HOST || "localhost",
     DB_NAME: process.env.DB_NAME || "countries",
+    CLIENT_URL: process.env.CLIENT_URL || "http://localhost:3000"
 }
