@@ -24,9 +24,9 @@ const { PORT } = require("./src/config/index");
 
 conn.sync({ force: false }).then(() => {
   server.listen(PORT, async () => {
-    console.log("%s Cargando paises...");
+    console.log("Cargando paises...");
     const preload = await apiCountries();
-    console.log("%s " + preload);
-    console.log("%s listening at", PORT);
+    console.log(preload);
+    console.log("Listening at port %s", PORT);
   });
 });
