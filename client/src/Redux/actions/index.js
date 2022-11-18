@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {SERVER_URL} from "../../config/index";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const GET_COUNTRY_DETAILS = "GET_COUNTRY_DETAILS";
@@ -16,7 +16,7 @@ export const getCountries = ({ page, orderA, orderP, filterA, name }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/countries?page=${page ? page : 1}&orderA=${
+        `${SERVER_URL}/countries?page=${page ? page : 1}&orderA=${
           orderA ? orderA : ""
         }&orderP=${orderP ? orderP : ""}&filterA=${
           filterA ? filterA : ""
@@ -35,7 +35,7 @@ export const getCountries = ({ page, orderA, orderP, filterA, name }) => {
 export const getCountryDetails = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/countries/${id}`);
+      const response = await axios.get(`${SERVER_URL}/countries/${id}`);
       return dispatch({
         type: GET_COUNTRY_DETAILS,
         payload: response.data,
@@ -56,7 +56,7 @@ export const removeCountry = () => {
 export const createActivity = (activity) => {
   return (dispatch) => {
     try {
-      axios.post(`http://localhost:3001/activities/`, activity).then(() => {
+      axios.post(`${SERVER_URL}/activities/`, activity).then(() => {
         return dispatch({
           type: CREATE_ACTIVITY,
         });
@@ -71,7 +71,7 @@ export const getActivities = ({ name }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/activities?name=${name ? name : ""}`
+        `${SERVER_URL}/activities?name=${name ? name : ""}`
       );
       return dispatch({
         type: GET_ACTIVITIES,
