@@ -20,13 +20,13 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const { apiCountries } = require("./src/controllers/countries");
-const port = process.env.PORT || 3001;
-// Syncing all the models at once.
+const { PORT } = require("./src/config/index");
+
 conn.sync({ force: false }).then(() => {
-  server.listen(port, async () => {
+  server.listen(PORT, async () => {
     console.log("%s Cargando paises...");
     const preload = await apiCountries();
     console.log("%s " + preload);
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    console.log("%s listening at", PORT);
   });
 });
