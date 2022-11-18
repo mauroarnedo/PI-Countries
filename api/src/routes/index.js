@@ -4,7 +4,7 @@ const activities = require("./activity.js");
 
 const router = Router();
 
-router.use("/countries", countries);
-router.use("/activities", activities);
+router.use("countries", countries);
+router.use("activities", activities);
 
 module.exports = router;
