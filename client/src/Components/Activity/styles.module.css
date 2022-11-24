@@ -43,7 +43,7 @@
 }
 
 .form {
-  margin-top: 6em;
+  margin-top: 4em;
   margin-left: 35%;
   width: 20em;
   height: 40em;
@@ -278,22 +278,32 @@
 
 
 @media screen and (max-width: 1023px) {
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-  }
   .link {
-    margin-top: 20em;
+    margin-top: 3em;
+    margin-left: 45%;
   }
   .form {
-    margin-left: 20%;
+    margin-left: 35%;
   }
 
 }
 
 @media screen and (max-width: 769px) {
+  .link {
+    margin-left: 40%;
+  }
   .form {
-    margin-left: 12%
+    margin-left: 27%
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .link {
+    margin-left: 35%;
+  }
+  .form {
+    margin-left: 15%
   }
   
 }
