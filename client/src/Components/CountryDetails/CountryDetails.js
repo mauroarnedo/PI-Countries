@@ -23,7 +23,7 @@ export default function CountryDetails(props) {
     return () => {
       dispatch(removeCountry());
     };
-  }, [dispatch, id]);
+  }, [ dispatch, id ]);
 
   function goBack() {
     history.goBack();
@@ -31,41 +31,43 @@ export default function CountryDetails(props) {
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <button className={styles.link} onClick={goBack}>
-        Go back
+        «
       </button>
-      <div className={styles.container}>
+      <div className={styles.box}>
         {country?.name ? (
           <React.Fragment>
-            <h4>{country.name}</h4>
-            <img src={country.flag} alt={countries} />
-            <div>
-              <p>
-                <strong>Código de país: {country.id}</strong>
-              </p>
-              <p>Capital: {country.capital}</p>
-              <p>Continent: {country.continent}</p>
-              <p>Subregión: {country.subregion}</p>
-              <p>Area: {country.area}</p>
-              <p>Population: {country.population}</p>
+            <div className={styles.container}>
+              <h4>{country.name}</h4>
+              <img src={country.flag} alt={countries} />
+              <div>
+                <p>
+                  <strong>Código de país: {country.id}</strong>
+                </p>
+                <p>Capital: {country.capital}</p>
+                <p>Continent: {country.continent}</p>
+                <p>Subregión: {country.subregion}</p>
+                <p>Area: {country.area}</p>
+                <p>Population: {country.population}</p>
+              </div>
             </div>
 
-            <div>
-              <h3>Tourist activities:</h3>
+            <div className={styles.container}>
+              <h3>Tourist activities</h3>
               {country.activities.length > 0
                 ? country.activities.map((activity) => {
-                    return (
-                      <ActivityCard
-                        key={activity.id}
-                        name={activity.name}
-                        difficulty={activity.difficulty}
-                        duration={activity.duration}
-                        season={activity.season.join(", ").trim()}
-                      />
-                    );
-                  })
-                : "No activities found"}
+                  return (
+                    <ActivityCard
+                      key={activity.id}
+                      name={activity.name}
+                      difficulty={activity.difficulty}
+                      duration={activity.duration}
+                      season={activity.season.join(", ").trim()}
+                    />
+                  );
+                })
+                : <p className={styles.textNull}><strong>No Activities found</strong></p>}
             </div>
           </React.Fragment>
         ) : (

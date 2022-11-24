@@ -6,11 +6,19 @@
 
 .container div select {
   text-align: center;
-  width: 15em;
+  width: 13em;
   height: 2em;
   margin: 1em;
-  /* border-radius: .9375em; */
   border: 0.2em solid #1a1a1a;
   background-color: transparent;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    width: 25em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  }
 }

@@ -15,9 +15,9 @@ export default function Home() {
   );
 
   useEffect(() => {
-    dispatch(getCountries({name, orderA, orderP, filterA, page}));
+    dispatch(getCountries({ name, orderA, orderP, filterA, page }));
     dispatch(getActivities({}));
-  }, [dispatch, filterA, name, orderA, orderP, page]);
+  }, [ dispatch, filterA, name, orderA, orderP, page ]);
 
   const changePage = (page) => {
     dispatch(getCountries({ page, orderA, orderP, filterA, name }));
@@ -46,23 +46,21 @@ export default function Home() {
         >
           next
         </button>
-      </div>     
-      <div className={styles.wrapper}>
-        <div className={styles.countries}>
-          {countries?.result?.length > 0 &&
-            countries.result.map((c) => {
-              return (
-                <CountryCard
-                  flag={c.flag}
-                  name={c.name}
-                  continent={c.continent}
-                  population={c.population}
-                  id={c.id}
-                  key={c.id}
-                />
-              );
-            })}
-        </div>
+      </div>
+      <div className={styles.countries}>
+        {countries?.result?.length > 0 &&
+          countries.result.map((c) => {
+            return (
+              <CountryCard
+                flag={c.flag}
+                name={c.name}
+                continent={c.continent}
+                population={c.population}
+                id={c.id}
+                key={c.id}
+              />
+            );
+          })}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 .link {
+  margin: 1em 0 0 2em;
   appearance: none;
   background-color: transparent;
   border: 0.125em solid #1a1a1a;
@@ -12,7 +13,6 @@
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
-  margin: 0em 3em 0em 3em;
   height: 3.75em;
   min-width: 3.75em;
   outline: none;
@@ -43,11 +43,10 @@
 }
 
 .form {
-  margin: 30px auto;
-  margin-top: 30px;
-  margin-left: 750px;
-  width: 300px;
-  height: 80%;
+  margin-top: 6em;
+  margin-left: 35%;
+  width: 20em;
+  height: 40em;
   border-radius: 10px;
   box-shadow: 5px 5px 3px 7px rgba(0, 0, 0, 0.25),
     5px 5px 3px 7px rgba(0, 0, 0, 0.22);
@@ -57,8 +56,6 @@
   align-items: flex-start;
   justify-content: space-around;
   flex-direction: column;
-  flex-wrap: wrap;
-  position: fixed;
 }
 
 .elements {
@@ -277,4 +274,26 @@
   font-family: "Quicksand", Tahoma, sans-serif;
   border: 2px solid rgba(8, 7, 7, 0.527);
   border-radius: 12px;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .link {
+    margin-top: 20em;
+  }
+  .form {
+    margin-left: 20%;
+  }
+
+}
+
+@media screen and (max-width: 769px) {
+  .form {
+    margin-left: 12%
+  }
+  
 }
