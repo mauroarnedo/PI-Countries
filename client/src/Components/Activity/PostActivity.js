@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 function validate(input) {
   const errors = {};
-  if (!input.name) errors.name = "Se requiere un nombre";
+  if (!input.name || input.name === "") errors.name = "Se requiere un nombre";
   if (!input.difficulty || input.difficulty === "" || isNaN(input.difficulty))
     errors.difficulty = "Se requiere un nivel de dificultad entre 1 y 5";
   if (!input.duration || input.duration > 24 || input.duration < 1)
@@ -94,12 +94,12 @@ export default function PostActivity() {
   };
 
   return (
-    <div>
-      <NavLink to="/home">
+    <div className={styles.wrapper}>
+      <NavLink to="/home" >
         <button className={styles.link}>Home</button>
       </NavLink>
 
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={onSubmit} autoComplete="off" >
         <div className={styles.elements}>
           <input
             className={styles.select}

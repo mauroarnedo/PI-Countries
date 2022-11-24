@@ -21,7 +21,7 @@ export default function Search() {
   };
 
   return (
-    <form className={styles.searchBox} onSubmit={onSubmit}>
+    <form className={styles.searchBox} onSubmit={onSubmit} autoComplete="off">
       <input
         className={styles.inputSearch}
         type="text"

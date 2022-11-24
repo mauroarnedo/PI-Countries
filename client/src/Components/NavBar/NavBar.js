@@ -18,7 +18,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getCountries({}));
-  }, [dispatch]);
+  }, [ dispatch ]);
 
   const home = (e) => {
     e.preventDefault();
@@ -34,18 +34,24 @@ export default function NavBar() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <NavLink to="/home">
-          <button onClick={home} className={styles.link}>
-            Home
-          </button>
-        </NavLink>
-      <OrdersFilters />
-      <NavLink to="/createActivity">
-        <button className={styles.link}>Create an activity!</button>
-      </NavLink>
+        <div>
+          <NavLink to="/home">
+            <button onClick={home} className={styles.link}>
+              Home
+            </button>
+          </NavLink>
+        </div>
+        <OrdersFilters />
+        <div>
+          <NavLink to="/createActivity">
+            <button className={styles.link}>Create an activity!</button>
+          </NavLink>
+        </div>
       </div>
-      <div>
+      <div className={styles.search}>
+        <div></div>
         <Search />
+        <div></div>
       </div>
     </div>
   );

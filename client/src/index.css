@@ -1,9 +1,11 @@
 body {
+  padding: 0;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #364552;
+  overflow-x: hidden;
 }
 
 code {
