@@ -94,7 +94,7 @@ export default function PostActivity() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <NavLink to="/home" >
         <button className={styles.link}>Home</button>
       </NavLink>
